@@ -1,9 +1,16 @@
 import styles from "./Form.module.css"
 import { FaPencilAlt } from "react-icons/fa";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Server } from "../constants";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { AddBackData } from "../Store/Slices/BackendData";
 const Form=(probs)=>{
+    const notify = (message) => {
+        toast.success(message);
+      };
+   const dispatch=useDispatch();
     const [data,setData]=useState({
         Title:"",
         Discription:"",
@@ -34,8 +41,12 @@ const Form=(probs)=>{
                  setData({ Title:"",
                     Discription:"",
                     Due_Date:""});
-                    alert("Task is Added");
-                    window.location.reload();
+                    // alert("Task is Added");
+                   
+                    // window.location.reload();
+                    dispatch(AddBackData());
+                    notify('Task Added successfully!');
+                    
                  
 
             }
@@ -61,6 +72,7 @@ const Form=(probs)=>{
     console.log(data)
 
     return <div className={toggle===false?`${styles.container}`:`${styles.container1}`}>
+   
         <form className={toggle===false?`${styles.inner}`:`${styles.inner1}`} onSubmit={sumbitData}>
             <h1> Task</h1>
             <div><FaPencilAlt /> <input className={styles.input} placeholder="Task Title" value={data.Title} onChange={(e)=>{
@@ -86,6 +98,7 @@ const Form=(probs)=>{
 
             
         </form>
+        <ToastContainer />
         
         
     </div>

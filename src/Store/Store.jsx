@@ -1,8 +1,10 @@
 import {configureStore} from "@reduxjs/toolkit";
 import Data from "./Slices/Data"
+import BackendData from "./Slices/BackendData";
 const Store=configureStore({
     reducer:{
-        Data:Data
+        Data:Data,
+        BackendData:BackendData
     }
 });
 export default Store;

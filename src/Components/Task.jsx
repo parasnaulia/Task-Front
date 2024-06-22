@@ -1,13 +1,20 @@
 import { useEffect, useState } from "react";
 import styles from "./Task.module.css"
+
 import { useSelector } from "react-redux";
 import { Server } from "../constants";
+import { useDispatch } from "react-redux";
+// import { useSelector } from "react-redux";
+import { AddBackData } from "../Store/Slices/BackendData";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 // import styles from "./Task.module.css"
 // import { Form } from "react-router-dom";
 const Task = (probs) => {
     const toggle=  useSelector((state)=>{
         return state.Data;
        })
+       const dispatch=useDispatch();
    const [tog,settog]= useState(false);
    const [update,setUpdate]=useState(false);
 //   const [pp,setPP]= useState(false);
@@ -16,6 +23,10 @@ const Task = (probs) => {
     Due_Date:"",
     Discription:""
    })
+   const notify = (message) => {
+    toast.success(message);
+  };
+
 
 const DeleteIt=()=>{
     async function Del()
@@ -28,8 +39,13 @@ const DeleteIt=()=>{
             
             })
             // alert("Task is Deleted");
-            console.log(data)
-            window.location.reload();
+
+            console.log(data);
+            notify('Task Deleted successfully!');
+           
+
+            // window.location.reload();
+             dispatch(AddBackData())
 
         }
         catch(e)
@@ -63,9 +79,13 @@ const updateData=(e)=>{
             })
             console.log("data is updated"+data)
             // console.log("data")
-            alert("Task Is Updated");
+            // alert("Task Is Updated");
+            dispatch(AddBackData());
+            notify('Task Updated successfully!');
+            
             // setPP(!pp);
-            window.location.reload()
+            
+            // window.location.reload()
             
         }
         catch(e)
@@ -105,7 +125,7 @@ const updateData=(e)=>{
  
 
     </div>:""}
-
+    {/* <ToastContainer /> */}
    { update===true?<div className="Form">
     <div>
         <h1>Update Task</h1>
@@ -149,6 +169,7 @@ const updateData=(e)=>{
 
     </div>
    </div>:""}
+   
     </>
   )
 }

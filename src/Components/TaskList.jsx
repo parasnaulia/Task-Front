@@ -8,7 +8,10 @@ const TaskList=()=>{
    const toggle=  useSelector((state)=>{
     return state.Data;
    })
-
+   const toggle1=  useSelector((state)=>{
+    return state.BackendData;
+   })
+   console.log("This is main data"+toggle1)
    useEffect(()=>{
     async function fetching()
     {
@@ -20,7 +23,7 @@ const TaskList=()=>{
     }
     fetching();
 
-   },[])
+   },[toggle1])
     // let arr=[1,2,3,4,5];
     return <div className={toggle===false?`${styles.container}`:`${styles.container1}`}>
        {arr.length!==0? <h1>
