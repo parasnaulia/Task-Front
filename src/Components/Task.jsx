@@ -27,7 +27,7 @@ const DeleteIt=()=>{
                 headers:{"Content-type":"application/json"},
             
             })
-            alert("Task is Deleted");
+            // alert("Task is Deleted");
             console.log(data)
             window.location.reload();
 
